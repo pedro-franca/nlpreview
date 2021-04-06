@@ -48,10 +48,7 @@ import pandas as pd
 
 # get_cached_data()
 
-#DEFAULT PARAMETERS
-city_name_input = "Boston"
-rest_name_input = "Mike's Pastry"
-rating_input = 3
+
 
 #LAYING OUT THE SIDE BAR
 st.sidebar.markdown(f"""
@@ -70,11 +67,11 @@ st.sidebar.header('Word Cloud and Bar Chart Selections')
 double_entry = st.sidebar.radio('Benchmark your business to others', ('Single View', 'Display Benchmark'))
 
 rest_name_input2 = 'Parish Cafe and Bar'
-rest_name_input3 = 'Bistro du Midi'
+rest_name_input3 = 'Tatte Bakery & Cafe'
 rest_name_input2 = st.sidebar.text_input('Business Name', 'Parish Cafe and Bar', key='rest_name_input2')
 if double_entry == 'Display Benchmark':
   st.sidebar.subheader('Select a business for Benchmarking')
-  rest_name_input3 = st.sidebar.text_input('Benchmark Business Name', 'Bistro du Midi', key='rest_name_input3')
+  rest_name_input3 = st.sidebar.text_input('Benchmark Business Name', 'Tatte Bakery & Cafe', key='rest_name_input3')
 
 st.sidebar.header('Upload Reviews')
 st.set_option('deprecation.showfileUploaderEncoding', False)
@@ -99,8 +96,8 @@ with row1_1:
     </div>
   """
   st.write(WELCOME_HTML, unsafe_allow_html=True)
-  st.markdown(""" 
-    ## A visual aid tool for sentiment analysis with your business reviews. 
+  st.markdown("""
+    ## A visual aid tool for sentiment analysis with your business reviews.
     ### Please, feel free to try different approaches in the control panel on the left, as well as our predictive model below.
     ### Locate businesses in the map by city and rating; find your business and other to benchmark.
     ### Enjoy the beautiful insights!
@@ -118,7 +115,7 @@ with row1_3:
 st.markdown("""# """)
 
 #STOP WORDS SELECTIONS
-  
+
 def make_checkbox_one(words):
   words_list = [x[0] for x in words[:10]]
   checkbox = []
@@ -179,7 +176,7 @@ if uploaded_file is not None:
     count = pd.DataFrame(count)
     count.columns = ['Count']
     st.write(count)
-    
+
 
 else:
   st.markdown("""## """)
@@ -221,7 +218,7 @@ if double_entry == 'Display Benchmark':
       c_positive, c_negative, data_positive, data_negative = dv.make_wordcloud_interactive(rest_name_input2, checked_pos_words, [])
       b_pos, b_neg = dv.make_barplot_interactive(rest_name_input2, checked_pos_words, [])
   with col4:
-    st.markdown("""## """) 
+    st.markdown("""## """)
   with col5:
     st_pyecharts(c_positive,
       theme={
@@ -313,7 +310,7 @@ if double_entry == 'Display Benchmark':
       c_positive, c_negative, data_positive, data_negative = dv.make_wordcloud_interactive(rest_name_input2, [], checked_neg_words)
       b_pos, b_neg = dv.make_barplot_interactive(rest_name_input2, [], checked_neg_words)
   with col4:
-    st.markdown("""## """) 
+    st.markdown("""## """)
   with col5:
     st_pyecharts(c_negative,
       theme={
@@ -433,7 +430,7 @@ else:
       },
     )
   st.markdown("""## """)
- 
+
 #SINGLE VIEW NEGATIVE REVIEWS VISUALIZATIONS AND STOPWORDS
   st.text('select stop words below for NEGATIVE reviews')
   col1, col2, col3, col4, col5 = st.beta_columns((2,2,2,1,14))
@@ -483,7 +480,7 @@ else:
       },
     )
 
-    
+
 st.markdown("""# """)
 HEADER_HTML_BOTTOM = f"""
   <div><h1>WORD FREQUENCY ACROSS CATEGORIES</h1>
@@ -494,7 +491,7 @@ st.subheader("Find mentions for each word by selecting on the chart or through t
 html = dv.get_sct_html(rest_name_input2, city_name_input)
 
 HtmlFile = open("rest_reviews-Vis.html", 'r', encoding='utf-8')
-source_code = HtmlFile.read() 
+source_code = HtmlFile.read()
 components.html(source_code, height = 50000)
 
 
@@ -529,7 +526,7 @@ def set_png_as_page_bg2(png_file):
     }
     </style>
     ''' % bin_str
-    
+
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
 set_png_as_page_bg2('logo2.png')
@@ -552,5 +549,5 @@ p {
   margin-top: 0;
   padding-top: 0;
 }
-"""  
+"""
 st.write(f'<style>{CSS}</style>', unsafe_allow_html=True)
