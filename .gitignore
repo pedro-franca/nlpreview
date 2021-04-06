@@ -2,6 +2,7 @@
 .coverage
 .ipynb_checkpoints
 .DS_Store
-raw_data/
+Sentimedia/data
 **/__pycache__/
 .env
+testing.ipynb
